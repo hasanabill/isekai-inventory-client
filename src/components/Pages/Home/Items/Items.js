@@ -12,7 +12,7 @@ const Items = ({ item }) => {
     }
 
     return (
-        <div className='col-md-4 col-sm-6 col-12'>
+        <div className='col-md-4 col-sm-6 col-12 my-2'>
             <Card style={{ width: '20rem' }}>
                 <Card.Img variant="top" className='' src={img} />
                 <Card.Body>
