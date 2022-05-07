@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import useItems from './../../../Hooks/useItems';
 
 const ManageInv = () => {
@@ -14,7 +15,6 @@ const ManageInv = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
                     const remaining = items.filter(item => item._id !== id)
                     setItems(remaining)
                 })
@@ -23,7 +23,8 @@ const ManageInv = () => {
 
     return (
         <div className='container'>
-            <h2>Management: {items.length}</h2>
+            <h2 className='text-center'>Management: {items.length}</h2>
+            <button className='d-block mx-auto text-decoration-none btn btn-dark'><Link className='text-decoration-none text-white' to='/additem'>Add New Item</Link></button>
             <div>
                 {
                     items.map(item => <div key={item._id}>

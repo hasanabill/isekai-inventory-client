@@ -8,10 +8,10 @@ const Inventory = () => {
 
     return (
         <div className='container'>
-            <h2>Inventory Items: {items.length}</h2>
+            <h2 className='text-center my-5'>Inventory Items</h2>
             <div className='row'>
                 {
-                    items.map(item => <Items
+                    items.slice(0, 6).map(item => <Items
                         key={item._id}
                         item={item}
                     ></Items>)
