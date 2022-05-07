@@ -1,15 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Items from '../Items/Items';
+import useItems from './../../../../Hooks/useItems';
 
 const Inventory = () => {
-
-    const [items, setItems] = useState([])
-    useEffect(() => {
-        fetch('http://localhost:5000/inventory')
-            .then(res => res.json())
-            .then(data => setItems(data))
-    }, [])
+    const [items] = useItems();
 
     return (
         <div className='container'>
