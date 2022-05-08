@@ -1,15 +1,14 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 
 const AddItem = () => {
     const { register, handleSubmit } = useForm();
-    const navigate = useNavigate()
     const [user] = useAuthState(auth)
 
-    const onSubmit = data => {
+    const onSubmit = (data) => {
         const url = 'https://powerful-bastion-77525.herokuapp.com/inventory';
         fetch(url, {
             method: "POST",
@@ -18,7 +17,6 @@ const AddItem = () => {
             },
             body: JSON.stringify(data)
         })
-        navigate('/inventory')
     };
 
     return (
