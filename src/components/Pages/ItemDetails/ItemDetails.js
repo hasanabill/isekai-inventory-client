@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const ItemDetails = () => {
 
@@ -8,11 +10,35 @@ const ItemDetails = () => {
 
     const [item, setItem] = useState({});
     useEffect(() => {
-        const url = `http://localhost:5000/inventory/${itemId}`
-        fetch(url)
+        const url = `https://powerful-bastion-77525.herokuapp.com/inventory/${itemId}`
+        const getData = async () => {
+            const { data } = await axios.get(url)
+            setItem(data)
+        }
+        getData();
+    }, [itemId]);
+
+    const handleUpdateStock = event => {
+        event.preventDefault();
+        const quantity = parseInt(event.target.quantity.value);
+        const previousQuantity = parseInt(item.quantity)
+        const newQuantity = quantity + previousQuantity;
+
+        const updated = { quantity: newQuantity }
+        const url = `https://powerful-bastion-77525.herokuapp.com/item/${itemId}`
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updated)
+        })
             .then(res => res.json())
-            .then(data => setItem(data))
-    }, [itemId])
+            .then(data => {
+                toast('Stock Updated')
+                event.target.reset();
+            })
+    }
 
     return (
         <div className='container my-5'>
@@ -28,12 +54,12 @@ const ItemDetails = () => {
                     <button className='btn btn-dark'>Delivered</button>
                 </div>
             </div>
-            <Form className='w-50 mx-auto my-5'>
+            <Form onSubmit={handleUpdateStock} className='w-50 mx-auto my-5'>
                 <Form.Group className="mb-3">
                     <Form.Label>Restock the Item</Form.Label>
-                    <Form.Control type="number" placeholder="Enter quantity" />
+                    <Form.Control type="number" name='quantity' placeholder="Enter quantity" />
                 </Form.Group>
-                <Button className='' variant="dark" type="submit">
+                <Button variant="dark" type="submit">
                     Add to Stock
                 </Button>
             </Form>

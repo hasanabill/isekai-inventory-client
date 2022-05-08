@@ -10,7 +10,7 @@ const AddItem = () => {
     const [user] = useAuthState(auth)
 
     const onSubmit = data => {
-        const url = 'http://localhost:5000/inventory';
+        const url = 'https://powerful-bastion-77525.herokuapp.com/inventory';
         fetch(url, {
             method: "POST",
             headers: {

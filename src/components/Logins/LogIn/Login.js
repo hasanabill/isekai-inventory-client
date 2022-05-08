@@ -6,6 +6,7 @@ import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import Loading from './../../Loading/Loading';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Login = () => {
 
@@ -41,11 +42,14 @@ const Login = () => {
     }
 
     // login handling
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        signInWithEmailAndPassword(email, password);
+        await signInWithEmailAndPassword(email, password);
+        const { data } = await axios.post('https://powerful-bastion-77525.herokuapp.com/login', { email })
+        localStorage.setItem('accessToken', data.accessToken);
+        navigate(from, { replace: true });
     }
 
     // password reset handling

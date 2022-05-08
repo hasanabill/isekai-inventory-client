@@ -7,9 +7,9 @@ const ManageInv = () => {
     const [items, setItems] = useItems();
 
     const handleDelete = id => {
-        const proceed = window.confirm('Are you sure?')
-        if (proceed) {
-            const url = `http://localhost:5000/item/${id}`;
+        const confirm = window.confirm('Are you sure?')
+        if (confirm) {
+            const url = `https://powerful-bastion-77525.herokuapp.com/item/${id}`;
             fetch(url, {
                 method: 'DELETE',
             })
