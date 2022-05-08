@@ -23,7 +23,7 @@ const ManageInv = () => {
 
     return (
         <div className='container'>
-            <h2 className='text-center'>Management: {items.length}</h2>
+            <h2 className='text-center'>Manage Your Inventory</h2>
             <button className='d-block mx-auto text-decoration-none btn btn-dark'><Link className='text-decoration-none text-white' to='/additem'>Add New Item</Link></button>
             <div>
                 {

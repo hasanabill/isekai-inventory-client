@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Items from '../Items/Items';
 import useItems from './../../../../Hooks/useItems';
 
