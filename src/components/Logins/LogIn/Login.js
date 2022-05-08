@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import Loading from './../../Loading/Loading';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -12,7 +14,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
 
     const [
         signInWithEmailAndPassword,
@@ -28,15 +30,15 @@ const Login = () => {
     }
 
     // during loading time
-    // if (loading || sending) {
-    //     return <Loading></Loading>
-    // }
+    if (loading || sending) {
+        return <Loading></Loading>
+    }
 
     // // error handling
-    // let errorElement;
-    // if (error) {
-    //     errorElement = <>{error.message}</>
-    // }
+    let errorElement;
+    if (error) {
+        errorElement = <>{error.message}</>
+    }
 
     // login handling
     const handleLogin = (event) => {
@@ -50,11 +52,11 @@ const Login = () => {
     const resetPassword = async () => {
         const email = emailRef.current.value;
         if (email) {
-            // await sendPasswordResetEmail(email);
-            // toast('Check Your Email Inbox')
+            await sendPasswordResetEmail(email);
+            toast('Check Your Email Inbox')
         }
         else {
-            // toast('Enter Valid Email Address')
+            toast('Enter Valid Email Address')
         }
     };
 
@@ -73,7 +75,7 @@ const Login = () => {
 
                 <p>New here? <Link className='text-decoration-none' to='/signup'>Create New Account</Link></p>
                 <p>Forgot Password? <button className='btn btn-link text-primary text-decoration-none' onClick={resetPassword}>Reset Password</button></p>
-                {/* <p className='text-center text-danger'>{errorElement}</p> */}
+                <p className='text-center text-danger'>{errorElement}</p>
 
                 <Button className='w-50 d-block mx-auto' variant="dark" type="submit">
                     Login

@@ -1,10 +1,26 @@
-import React from 'react';
-import useItems from './../../../Hooks/useItems';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import axios from 'axios';
 
 const MyItems = () => {
 
-    const [items, setItems] = useItems();
+    const [items, setItems] = useState([]);
+    const [user] = useAuthState(auth)
+
+    useEffect(() => {
+        const getMyItems = async () => {
+            const email = user?.email;
+            const url = `http://localhost:5000/myitems?email=${email}`
+            const { data } = await axios.get(url)
+            setItems(data)
+        }
+
+        getMyItems();
+
+
+    }, [user])
 
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure?')
@@ -23,7 +39,7 @@ const MyItems = () => {
 
     return (
         <div className='container'>
-            <h2 className='text-center'>Manage Your Inventory</h2>
+            <h2 className='text-center'>Manage Your Inventory : {items.length}</h2>
             <button className='d-block mx-auto text-decoration-none btn btn-dark'><Link className='text-decoration-none text-white' to='/additem'>Add New Item</Link></button>
             <div>
                 {
