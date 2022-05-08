@@ -2,6 +2,7 @@ import React from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import Loading from './../../Loading/Loading';
 
 const SocialLogin = () => {
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ const SocialLogin = () => {
     // loading time spinner handling
     let loadElement;
     if (loading) {
-        // loadElement = <Loading></Loading>
+        loadElement = <Loading></Loading>
     }
 
     return (
