@@ -3,15 +3,17 @@ import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useNavigate, useLocation } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from './../../Loading/Loading';
+import useToken from './../../../Hooks/useToken';
 
 const SocialLogin = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
+    const [token] = useToken(user)
     // private route redirect handleing
     let from = location.state?.from?.pathname || "/";
-    if (user) {
+    if (token) {
         navigate(from, { replace: true });
     }
 
@@ -19,12 +21,6 @@ const SocialLogin = () => {
     let errorElement;
     if (error) {
         errorElement = <p>{error.message}</p>
-    }
-
-    // loading time spinner handling
-    let loadElement;
-    if (loading) {
-        loadElement = <Loading></Loading>
     }
 
     return (
@@ -39,12 +35,8 @@ const SocialLogin = () => {
                     <img src='' height="30" className='mx-2' alt="" />
                     Google Sign In
                 </button>
-                {/* <button onClick={() => signInWithFacebook()} className='btn btn-dark w-50 d-block mx-auto my-3'>
-                    <img src='' height="40" alt="" />
-                    FaceBook Sign In
-                </button> */}
             </div>
-            {loadElement}
+            <>{loading && <Loading></Loading>}</>
             <p className='text-center text-danger'>{errorElement}</p>
         </div>
     );

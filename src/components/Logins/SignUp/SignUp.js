@@ -4,6 +4,9 @@ import { Button, Form } from 'react-bootstrap';
 import SocialLogin from './../SocialLogin/SocialLogin';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from './../../../firebase.init';
+import { toast } from 'react-toastify';
+import useToken from './../../../Hooks/useToken';
+import Loading from './../../Loading/Loading';
 
 const SignUp = () => {
     const nameRef = useRef('')
@@ -21,8 +24,9 @@ const SignUp = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
-    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const [updateProfile,] = useUpdateProfile(auth);
 
+    const [token] = useToken(user)
     // error handling
     let errorElement;
     if (error) {
@@ -31,7 +35,7 @@ const SignUp = () => {
 
     // // private route redirect handleing
     let from = location.state?.from?.pathname || "/";
-    if (user) {
+    if (token) {
         navigate(from, { replace: true });
     }
 
@@ -44,9 +48,9 @@ const SignUp = () => {
 
         await createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName: name });
-        // if (email) {
-        //     toast('Varification Email Sent')
-        // }
+        if (email) {
+            toast('Varification Email Sent')
+        }
     }
 
     return (
@@ -69,7 +73,7 @@ const SignUp = () => {
 
                 <p>Already have an account? <Link className='text-decoration-none' to='/login'>Please Login</Link></p>
                 <p className='text-center text-danger'>{errorElement}</p>
-                {/* <>{loading && <Loading></Loading>}</> */}
+                <>{loading && <Loading></Loading>}</>
 
                 <Button className='w-50 d-block mx-auto' variant="dark" type="submit">
                     Sign Up

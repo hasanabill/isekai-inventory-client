@@ -6,7 +6,7 @@ import auth from '../../../firebase.init';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import Loading from './../../Loading/Loading';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import useToken from './../../../Hooks/useToken';
 
 const Login = () => {
 
@@ -24,9 +24,11 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    const [token] = useToken(user);
+
     // private route redirect handleing
     let from = location.state?.from?.pathname || "/";
-    if (user) {
+    if (token) {
         navigate(from, { replace: true });
     }
 
@@ -47,9 +49,8 @@ const Login = () => {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         await signInWithEmailAndPassword(email, password);
-        const { data } = await axios.post('https://powerful-bastion-77525.herokuapp.com/login', { email })
-        localStorage.setItem('accessToken', data.accessToken);
-        navigate(from, { replace: true });
+        // const { data } = await axios.post('https://powerful-bastion-77525.herokuapp.com/login', { email })
+        // localStorage.setItem('accessToken', data.accessToken);
     }
 
     // password reset handling
