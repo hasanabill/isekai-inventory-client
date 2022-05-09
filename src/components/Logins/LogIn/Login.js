@@ -47,7 +47,7 @@ const Login = () => {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         await signInWithEmailAndPassword(email, password);
-        const { data } = await axios.post('https://powerful-bastion-77525.herokuapp.com/login', { email })
+        const { data } = await axios.post('http://localhost:5000/login', { email })
         localStorage.setItem('accessToken', data.accessToken);
         navigate(from, { replace: true });
     }

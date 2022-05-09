@@ -10,7 +10,7 @@ const ItemDetails = () => {
 
     const [item, setItem] = useState({});
     useEffect(() => {
-        const url = `https://powerful-bastion-77525.herokuapp.com/inventory/${itemId}`
+        const url = `http://localhost:5000/inventory/${itemId}`
         const getData = async () => {
             const { data } = await axios.get(url)
             setItem(data)
@@ -25,7 +25,7 @@ const ItemDetails = () => {
         const newQuantity = quantity + previousQuantity;
 
         const updated = { quantity: newQuantity }
-        const url = `https://powerful-bastion-77525.herokuapp.com/item/${itemId}`
+        const url = `http://localhost:5000/item/${itemId}`
         fetch(url, {
             method: 'PUT',
             headers: {
