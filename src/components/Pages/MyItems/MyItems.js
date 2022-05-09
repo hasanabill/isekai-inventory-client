@@ -12,7 +12,7 @@ const MyItems = () => {
     useEffect(() => {
         const getMyItems = async () => {
             const email = user?.email;
-            const url = `http://localhost:5000/myitems?email=${email}`
+            const url = `https://powerful-bastion-77525.herokuapp.com/myitems?email=${email}`
             const { data } = await axios.get(url, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -29,7 +29,7 @@ const MyItems = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure?')
         if (proceed) {
-            const url = `http://localhost:5000/item/${id}`;
+            const url = `https://powerful-bastion-77525.herokuapp.com/item/${id}`;
             fetch(url, {
                 method: 'DELETE',
             })

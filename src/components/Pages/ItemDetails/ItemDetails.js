@@ -10,22 +10,18 @@ const ItemDetails = () => {
 
     const [item, setItem] = useState({});
     useEffect(() => {
-        const url = `http://localhost:5000/inventory/${itemId}`
+        const url = `https://powerful-bastion-77525.herokuapp.com/inventory/${itemId}`
         const getData = async () => {
             const { data } = await axios.get(url)
             setItem(data)
         }
         getData();
-    }, [itemId]);
+    }, [item]);
 
-    const handleUpdateStock = event => {
-        event.preventDefault();
-        const quantity = parseInt(event.target.quantity.value);
-        const previousQuantity = parseInt(item.quantity)
-        const newQuantity = quantity + previousQuantity;
+    const handleUpdateStock = newQuantity => {
 
         const updated = { quantity: newQuantity }
-        const url = `http://localhost:5000/item/${itemId}`
+        const url = `https://powerful-bastion-77525.herokuapp.com/item/${itemId}`
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -33,11 +29,24 @@ const ItemDetails = () => {
             },
             body: JSON.stringify(updated)
         })
-            .then(res => res.json())
-            .then(data => {
-                toast('Stock Updated')
-                event.target.reset();
-            })
+    }
+
+    const handleAddToStock = event => {
+        event.preventDefault();
+        const quantity = parseInt(event.target.quantity.value);
+        const previousQuantity = parseInt(item.quantity)
+        const newQuantity = quantity + previousQuantity;
+        handleUpdateStock(newQuantity)
+        toast('Restocked')
+        event.target.reset();
+    }
+
+    const handleDeliverd = () => {
+        const previousQuantity = parseInt(item.quantity);
+        const newQuantity = previousQuantity - 1;
+
+        handleUpdateStock(newQuantity)
+
     }
 
     return (
@@ -51,10 +60,10 @@ const ItemDetails = () => {
                     <h3 className='py-3'>Price: ${item.price}</h3>
                     <h3 className='py-3'>Quantity: {item.quantity}</h3>
                     <h4 className='py-3'>Details: {item.description}</h4>
-                    <button className='btn btn-dark'>Delivered</button>
+                    <button className='btn btn-dark' onClick={handleDeliverd}>Delivered</button>
                 </div>
             </div>
-            <Form onSubmit={handleUpdateStock} className='w-50 mx-auto my-5'>
+            <Form onSubmit={handleAddToStock} className='w-50 mx-auto my-5'>
                 <Form.Group className="mb-3">
                     <Form.Label>Restock the Item</Form.Label>
                     <Form.Control type="number" name='quantity' placeholder="Enter quantity" />
