@@ -1,3 +1,24 @@
+# Isekai Inventory
+## Checkout the website [here](https://isekai-inventory.web.app/)
+This website is for keeping track of buy sell and restocking of watches.
+
+### Features
+* Carousel in homepage
+* Single Page Application
+* Google Sign In
+* Facebook Sign In
+* Email Varification
+* Password Reset
+
+### Tools used
+* React JS
+* React Router
+* Firebase Authentication
+* React Bootstrap
+* React Firebase Hook
+* React hook form
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

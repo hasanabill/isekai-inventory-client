@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-// import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { toast } from 'react-toastify';
 
@@ -22,7 +21,7 @@ const AddItem = () => {
     };
 
     return (
-        <div className='w-50 mx-auto'>
+        <div className='w-50 mx-auto my-5'>
             <h2 className='text-center'>Add New Item</h2>
             <form className='d-flex flex-column' onSubmit={handleSubmit(onSubmit)}>
                 <input className='m-2' placeholder='Added By' value={user?.email} readOnly {...register("email")} />

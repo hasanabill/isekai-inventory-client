@@ -42,7 +42,7 @@ const MyItems = () => {
     }
 
     return (
-        <div className='container'>
+        <div className='container mb-5 pb-5'>
             <h2 className='text-center'>Manage Your Inventory : {items.length}</h2>
             <button className='d-block mx-auto text-decoration-none btn btn-dark'><Link className='text-decoration-none text-white' to='/additem'>Add New Item</Link></button>
             <div>
