@@ -9,7 +9,7 @@ const ManageInv = () => {
     const handleDelete = id => {
         const confirm = window.confirm('Are you sure?')
         if (confirm) {
-            const url = `https://powerful-bastion-77525.herokuapp.com/item/${id}`;
+            const url = `https://isekai-inventory.vercel.app/item/${id}`;
             fetch(url, {
                 method: 'DELETE',
             })

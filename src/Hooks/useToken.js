@@ -8,7 +8,7 @@ const useToken = user => {
             console.log(user)
             const email = user?.user?.email;
             if (email) {
-                const { data } = await axios.post('https://powerful-bastion-77525.herokuapp.com/login', { email })
+                const { data } = await axios.post('https://isekai-inventory.vercel.app/login', { email })
                 setToken(data.accessToken)
                 localStorage.setItem('accessToken', data.accessToken);
             }

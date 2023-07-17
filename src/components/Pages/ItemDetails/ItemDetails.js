@@ -10,7 +10,7 @@ const ItemDetails = () => {
 
     const [item, setItem] = useState({});
     useEffect(() => {
-        const url = `https://powerful-bastion-77525.herokuapp.com/inventory/${itemId}`
+        const url = `https://isekai-inventory.vercel.app/inventory/${itemId}`
         const getData = async () => {
             const { data } = await axios.get(url)
             setItem(data)
@@ -21,7 +21,7 @@ const ItemDetails = () => {
     const handleUpdateStock = newQuantity => {
 
         const updated = { quantity: newQuantity }
-        const url = `https://powerful-bastion-77525.herokuapp.com/item/${itemId}`
+        const url = `https://isekai-inventory.vercel.app/item/${itemId}`
         fetch(url, {
             method: 'PUT',
             headers: {

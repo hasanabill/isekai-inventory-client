@@ -9,7 +9,7 @@ const AddItem = () => {
     const [user] = useAuthState(auth)
 
     const onSubmit = (data) => {
-        const url = 'https://powerful-bastion-77525.herokuapp.com/inventory';
+        const url = 'https://isekai-inventory.vercel.app/inventory';
         fetch(url, {
             method: "POST",
             headers: {
