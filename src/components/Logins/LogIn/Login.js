@@ -49,7 +49,7 @@ const Login = () => {
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         await signInWithEmailAndPassword(email, password);
-        // const { data } = await axios.post('https://isekai-inventory.vercel.app/login', { email })
+        // const { data } = await axios.post('https://isekai-inventory-server.onrender.com/login', { email })
         // localStorage.setItem('accessToken', data.accessToken);
     }
 

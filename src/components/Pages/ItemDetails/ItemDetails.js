@@ -10,7 +10,7 @@ const ItemDetails = () => {
 
     const [item, setItem] = useState({});
     useEffect(() => {
-        const url = `https://isekai-inventory.vercel.app/inventory/${itemId}`
+        const url = `https://isekai-inventory-server.onrender.com/inventory/${itemId}`
         const getData = async () => {
             const { data } = await axios.get(url)
             setItem(data)
@@ -21,7 +21,7 @@ const ItemDetails = () => {
     const handleUpdateStock = newQuantity => {
 
         const updated = { quantity: newQuantity }
-        const url = `https://isekai-inventory.vercel.app/item/${itemId}`
+        const url = `https://isekai-inventory-server.onrender.com/item/${itemId}`
         fetch(url, {
             method: 'PUT',
             headers: {

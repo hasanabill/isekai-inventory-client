@@ -12,7 +12,7 @@ const MyItems = () => {
     useEffect(() => {
         const getMyItems = async () => {
             const email = user?.email;
-            const url = `https://isekai-inventory.vercel.app/myitems?email=${email}`
+            const url = `https://isekai-inventory-server.onrender.com/myitems?email=${email}`
             const { data } = await axios.get(url, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -29,7 +29,7 @@ const MyItems = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure?')
         if (proceed) {
-            const url = `https://isekai-inventory.vercel.app/item/${id}`;
+            const url = `https://isekai-inventory-server.onrender.com/item/${id}`;
             fetch(url, {
                 method: 'DELETE',
             })

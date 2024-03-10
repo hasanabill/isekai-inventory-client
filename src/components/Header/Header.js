@@ -21,7 +21,7 @@ const Header = () => {
                         <Nav className="mx-auto">
                             <Nav.Link as={Link} to="/home">Home</Nav.Link>
                             <Nav.Link as={Link} to="/inventory">Manage Inventory</Nav.Link>
-                            <Nav.Link as={Link} to="/blogs">Blogs</Nav.Link>
+                            {/* <Nav.Link as={Link} to="/blogs">Blogs</Nav.Link> */}
                             {
                                 user && <>
                                     <Nav.Link as={Link} to="/myitems">My Items</Nav.Link>
@@ -34,7 +34,10 @@ const Header = () => {
                                 user ?
                                     <>
                                         <Nav.Link>{user && user.displayName}</Nav.Link>
-                                        <Nav.Link className='btn btn-light text-dark' onClick={() => signOut(auth)}>Sign out</Nav.Link>
+                                        <Nav.Link className='btn btn-light text-dark' onClick={() => {
+                                            signOut(auth)
+                                            localStorage.removeItem('accessToken')
+                                        }}>Sign out</Nav.Link>
                                     </>
                                     :
                                     <>

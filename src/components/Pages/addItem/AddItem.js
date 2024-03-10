@@ -9,7 +9,7 @@ const AddItem = () => {
     const [user] = useAuthState(auth)
 
     const onSubmit = (data) => {
-        const url = 'https://isekai-inventory.vercel.app/inventory';
+        const url = 'https://isekai-inventory-server.onrender.com/inventory';
         fetch(url, {
             method: "POST",
             headers: {
